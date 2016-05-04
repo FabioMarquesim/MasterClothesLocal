@@ -77,7 +77,7 @@ public class PessoaFisicaDAO implements GenericDAO<PessoaFisica>{
                 int resultado2 = pst2.executeUpdate();
                 
                 //Passo 4 b
-                if(resultado2==0) System.out.println("PROBLEMA no cadastro do usuario");;
+                if(resultado2==0) System.out.println("PROBLEMA no cadastro do usuario");
                 
                 //Passo 5 b
                 pst2.close();
@@ -99,8 +99,8 @@ public class PessoaFisicaDAO implements GenericDAO<PessoaFisica>{
         try {
             
             //Passo 2 - criar o statement
-            String sql = "SELECT * FROM cliente INNER JOIN usuario "
-                    + "ON id_cliente=id_usuario";
+            String sql = "SELECT * FROM pessoa_fisica INNER JOIN usuario "
+                    + "ON id_pfisica=id_usuario";
             PreparedStatement pst = connection.prepareStatement(sql);
             
             //Passo 3 - executar a consulta
