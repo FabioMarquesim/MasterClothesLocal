@@ -1,0 +1,24 @@
+CREATE TABLE user_login (
+    id_user_login BIGINT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY(START WITH 1, INCREMENT BY 1),
+    username VARCHAR(20) NOT NULL,
+    password VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE user_info(
+    id_user_info BIGINT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY(START WITH 1, INCREMENT BY 1),
+    fk_user_login BIGINT NOT NULL,
+    nameclient VARCHAR(25) NOT NULL,
+    email VARCHAR(30) NOT NULL,
+    street VARCHAR(30) NOT NULL,
+    city VARCHAR(20) NOT NULL,
+    stateCode VARCHAR(2) NOT NULL,
+    country VARCHAR(15) NOT NULL,
+    zipCode BIGINT NOT NULL,
+    phone VARCHAR(18) NOT NULL
+
+);
+
+ALTER TABLE user_info 
+ADD FOREIGN KEY(fk_user_login) 
+REFERENCES user_login(id_user_login)
+ON DELETE cascade;

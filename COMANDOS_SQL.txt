@@ -1,0 +1,30 @@
+CREATE TABLE order_item(
+    id_item bigint not null primary key generated always as identity(start with 1, increment by 1),
+    fk_client bigint not null, 
+    fk_product bigint not null,
+    quantity bigint not null
+);
+
+CREATE TABLE product(
+    id_product bigint not null primary key generated always as identity(start with 1, increment by 1),
+    ref_cod BIGINT not null,
+    product_name varchar(20) not null,
+    prod_value DECIMAL(10,2) not null,
+    description VARCHAR(110) not null,
+    status BOOLEAN not null,
+    color VARCHAR(10) not null,
+    prod_size VARCHAR(5)
+);
+    
+ALTER TABLE orders
+ADD FOREIGN KEY(fk_client)
+REFERENCES user_info(id_user_info);
+
+ALTER TABLE orders
+ADD FOREIGN KEY(fk_item_prod)
+REFERENCES order_item(id_item)
+ON DELETE cascade; 
+
+ALTER TABLE order_item
+ADD FOREIGN KEY(fk_product)
+REFERENCES product(id_product); 
