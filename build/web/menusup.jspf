@@ -26,7 +26,7 @@
                         <li><a id="loja_masc">Masculino<span class="sr-only">(current)</span></a></li>
                         <li><a id="loja_sale">Sale<span class="sr-only">(current)</span></a></li>
                     </ul>
-                    <ul class="nav navbar-nav navbar-right">
+                    <ul>
                         <li><a id="login">Entrar</a></li>
                         <li><a id="cadastro">Cadastrar</a></li>
                     </ul>

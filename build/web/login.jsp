@@ -40,10 +40,10 @@
                                 </div>
                             </div>
                         </figure>
-                        <label for="inputEmail" class="sr-only">Username</label>
-                        <input type="text" id="inputEmail" name="inputEmail" class="form-control" placeholder="Username" required autofocus>
+                        <label for="inputEmail" class="sr-only">Nomde de Usuário</label>
+                        <input type="text" id="inputEmail" name="username" class="form-control" placeholder="Username" required autofocus>
                         <label for="inputPassword" class="sr-only">Senha</label>
-                        <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Senha" required>
+                        <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Senha" required>
                         <div class="checkbox">
                             <label>
                                 <input type="checkbox" value="remember-me"> Lembrar-me
