@@ -12,3 +12,8 @@ os.arch=amd64
 os.version=6.3
 derby.system.home=D:\Mackenzie\3_Semestre\MasterClothesLocal\db
 Carregador de classe do banco de dados iniciado - derby.database.classpath=''
+----------------------------------------------------------------
+Thu May 05 08:52:52 BRT 2016: Shutting down Derby engine
+----------------------------------------------------------------
+Thu May 05 08:52:52 BRT 2016:
+Encerrando a instância a816c00e-0154-8084-d3d2-ffffa605f294
