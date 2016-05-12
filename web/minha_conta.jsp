@@ -3,7 +3,7 @@
     Created on : 26/04/2016, 15:57:01
     Author     : fabio
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">

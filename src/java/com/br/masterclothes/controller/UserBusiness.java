@@ -17,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -44,6 +45,7 @@ public class UserBusiness extends HttpServlet {
     private String cidade;
     private String estado;
     private String pais;
+    private PessoaFisica pfisica;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -66,21 +68,26 @@ public class UserBusiness extends HttpServlet {
 
             if (command.endsWith("login")) {// Executa o Login
 
-                PessoaFisica pfisica = pfisicadao.readByUsername(username);
+                pfisica = pfisicadao.readByUsername(username);
 
                 if (pfisica == null) {
                     response.sendRedirect("login.jsp");
                     System.out.println("O valor pfisica está null");
+                    System.out.println("=========================");
                 } else if (pwd.equals(pfisica.getUsuario().getSenha())) {
 
                     //Primeira Forma
-                    response.sendRedirect("home.jsp"); //Apenas redireciona a Pagina
+                    //response.sendRedirect("index.jsp"); //Apenas redireciona a Pagina
                     //Segunda Forma
                     //RequestDispatcher rd = request.getRequestDispatcher("/home.jsp"); //Mantem url mudando o conteudo
                     //rd.forward(request, response);
                     //Terceira Forma
                     //RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
                     //rd.include(request, response);
+                    HttpSession session = request.getSession();
+                    session.setAttribute("pfisica", pfisica);
+                    response.sendRedirect("index.jsp");
+                    System.out.println("Redirecionando...");
 
                 } else {
                     out.println("DEU RUIM!");
@@ -140,7 +147,7 @@ public class UserBusiness extends HttpServlet {
                     usuario.setSenha(pwd);
                     usuario.setTipo(1);
 
-                    PessoaFisica pfisica = new PessoaFisica();
+                    pfisica = new PessoaFisica();
                     pfisica.setNome(nome);
                     pfisica.setSobrenome(sobrenome);
                     switch (sexo) {
@@ -176,6 +183,9 @@ public class UserBusiness extends HttpServlet {
                 }
                 //Fim Cadastrar    
             } else if (command.endsWith("sair")) {
+
+                request.getSession().setAttribute("pfisica", null);
+                response.sendRedirect("index.jsp");
                 
                 //Fim sair da conta
             }
