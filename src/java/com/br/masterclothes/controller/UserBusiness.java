@@ -11,9 +11,14 @@ import com.br.masterclothes.model.entities.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,12 +33,10 @@ public class UserBusiness extends HttpServlet {
 
     private String command;
     private String username;
-    private String password;
     private String pwd;
     private PessoaFisicaDAO pfisicadao;
     private String nome;
     private String sobrenome;
-    private Date datanasc;
     private String sexo;
     private String telefone;
     private String email;
@@ -74,24 +77,33 @@ public class UserBusiness extends HttpServlet {
                     response.sendRedirect("login.jsp");
                     System.out.println("O valor pfisica está null");
                     System.out.println("=========================");
-                } else if (pwd.equals(pfisica.getUsuario().getSenha())) {
 
-                    //Primeira Forma
-                    //response.sendRedirect("index.jsp"); //Apenas redireciona a Pagina
-                    //Segunda Forma
-                    //RequestDispatcher rd = request.getRequestDispatcher("/home.jsp"); //Mantem url mudando o conteudo
-                    //rd.forward(request, response);
-                    //Terceira Forma
-                    //RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-                    //rd.include(request, response);
+                } else if (pwd.equals(pfisica.getUsuario().getSenha())) {
+                    Cookie c1;
+                    Cookie c2;
+                    if (request.getParameter("lembrar") != null) {
+                        c1 = new Cookie("username", pfisica.getUsuario().getNome_usuario());
+                        c1.setMaxAge(60 * 60 * 24); //tempo em segundos (1 dia)
+                        c2 = new Cookie("password", pfisica.getUsuario().getSenha());
+                        c2.setMaxAge(60 * 60 * 24);
+
+                    } else {
+                        c1 = new Cookie("username", "");
+                        c1.setMaxAge(-1);
+                        c2 = new Cookie("password", "");
+                        c2.setMaxAge(-1);
+                    }
+                    response.addCookie(c1);
+                    response.addCookie(c2);
+
                     HttpSession session = request.getSession();
                     session.setAttribute("pfisica", pfisica);
                     response.sendRedirect("index.jsp");
                     System.out.println("Redirecionando...");
 
                 } else {
-                    out.println("DEU RUIM!");
-                    out.println("SENHA INCORRETA");
+                    request.getSession().setAttribute("erro", "Usuário ou senha incorretos.");
+                    response.sendRedirect("login.jsp");
                 }
                 //fim login
             } else if (command.endsWith("cadastrar")) {
@@ -101,7 +113,13 @@ public class UserBusiness extends HttpServlet {
                 //Sobrenome
                 sobrenome = request.getParameter("lastName");
                 //DataNasc
-                //datanasc = request.getParameter("datanasc");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                java.util.Date dataNasc = null;
+                try {
+                    dataNasc = sdf.parse(request.getParameter("dataNasc"));
+                } catch (ParseException ex) {
+                    Logger.getLogger(UserBusiness.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 //Nome Usuario
                 username = request.getParameter("username");
                 //Senha
@@ -136,11 +154,14 @@ public class UserBusiness extends HttpServlet {
                 PessoaFisica cliente2 = pfisicadao.readByUsername(username);
 
                 if (!pwd.equals(pwd2)) {
-                    out.println("Deu Ruim, Senhas não compativeis");
+                    request.getSession().setAttribute("erro", "Senhas nã Compativeis");
+                    response.sendRedirect("cadastro.jsp");
                 } else if (cliente2 != null) {
-                    out.println("DEU RUIM! Usuario já existe, tente outro nome!");
+                    request.getSession().setAttribute("erro", "Usuario já existe, tente outro nome!");
+                    response.sendRedirect("cadastro.jsp");
                 } else if (!email.equals(email2)) {
-                    out.println("Deu Ruim, Email não compativel");
+                    request.getSession().setAttribute("erro", "Email não compativel");
+                    response.sendRedirect("cadastro.jsp");
                 } else {
                     Usuario usuario = new Usuario();
                     usuario.setNome_usuario(username);
@@ -171,11 +192,13 @@ public class UserBusiness extends HttpServlet {
                     pfisica.setCidade(cidade);
                     pfisica.setEstado(estado);
                     pfisica.setPais(pais);
+                    pfisica.setDataNasc(dataNasc);
                     pfisica.setUsuario(usuario);
 
                     long chave = pfisicadao.create(pfisica);
                     if (chave == -1) {
-                        out.println("DEU RUIM! Erro ao inserir no banco!");
+                        request.getSession().setAttribute("erro", "Erro ao inserir no banco!");
+                        response.sendRedirect("cadastro.jsp");
                     } else {
                         RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
                         rd.forward(request, response);
@@ -185,9 +208,81 @@ public class UserBusiness extends HttpServlet {
             } else if (command.endsWith("sair")) {
 
                 request.getSession().setAttribute("pfisica", null);
+                request.getSession().setAttribute("prodAdds", null);
+                request.getSession().setAttribute("sub", 0.00);
                 response.sendRedirect("index.jsp");
-                
+
                 //Fim sair da conta
+            } else if (command.endsWith("trocarSenha")) {
+
+                String senhaAtual = request.getParameter("senhaAtual");
+                PessoaFisica c = (PessoaFisica) request.getSession().getAttribute("pfisica");
+                System.out.println("Senha do FORM: " + senhaAtual);
+                System.out.println("Senha do Banco" + c.getUsuario().getSenha());
+
+                if (senhaAtual.equals(c.getUsuario().getSenha())) {
+                    //usuário autenticado
+                    String novaSenha = request.getParameter("novaSenha");
+                    String novaSenha2 = request.getParameter("novaSenha2");
+
+                    if (novaSenha.equals(novaSenha2)) {
+                        //pode trocar a senha
+                        c.getUsuario().setSenha(novaSenha);
+                        boolean resp = pfisicadao.update(c);
+                        if (resp) {
+                            request.getSession().setAttribute("erro", "Atualizado com Sucesso!");
+                            response.sendRedirect("minha_conta.jsp");
+                        } else {
+                            System.out.println(c);
+                            request.getSession().setAttribute("erro", "Houve um problema na conexão. Tente novamente!");
+                            response.sendRedirect("minha_conta.jsp");
+                        }
+                    } else {
+                        request.getSession().setAttribute("erro", "Senha nova não confere!");
+                        response.sendRedirect("minha_conta.jsp");
+                    }
+                } else {
+                    request.getSession().setAttribute("erro", "Senha atual não confere!");
+                    response.sendRedirect("minha_conta.jsp");
+                }
+                //FIM Trocar Senha
+            } else if (command.endsWith("apagar")) {
+                PessoaFisica cliente = (PessoaFisica) request.getSession().getAttribute("pfisica");
+                System.out.println(cliente.getId_pfisica());
+                boolean resp = pfisicadao.delete(cliente);
+                if (resp) {
+                    response.sendRedirect("index.jsp");
+                } else {
+                    request.getSession().setAttribute("erro", "Erro ao Apagar Conta!");
+                    response.sendRedirect("minha_conta.jsp");
+                }
+                request.getSession().invalidate();
+                Cookie c1 = new Cookie("username", "");
+                c1.setMaxAge(-1);
+                Cookie c2 = new Cookie("password", "");
+                c2.setMaxAge(-1);
+                response.addCookie(c1);
+                response.addCookie(c2);
+
+                //Fim Apagar Conta
+            } else if (command.endsWith("alterarDados")) {
+                PessoaFisica cliente = (PessoaFisica) request.getSession().getAttribute("pfisica");
+                cliente.setNome(request.getParameter("firstName"));
+                cliente.setSobrenome(request.getParameter("lastName"));
+                String newEmail = request.getParameter("email");
+
+                if (!newEmail.equals(request.getParameter("email2"))) {
+                    request.getSession().setAttribute("erro2", "Os email não confere!");
+                    response.sendRedirect("minha_conta.jsp");
+                } else {
+                    cliente.setEmail(newEmail);
+                }
+
+                request.getSession().setAttribute("pfisica", cliente);
+                pfisicadao.update(cliente);
+                request.getSession().setAttribute("erro2", "Alterado com Sucesso!");
+                response.sendRedirect("minha_conta.jsp");
+                //Fim alterar Dados
             }
 
         }

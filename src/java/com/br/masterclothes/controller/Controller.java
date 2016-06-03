@@ -38,6 +38,12 @@ public class Controller extends HttpServlet {
             if(command.startsWith("user")){
                 RequestDispatcher rd = request.getRequestDispatcher("/UserBusiness");
                 rd.forward(request, response);
+            }else if(command.startsWith("prod")){
+                RequestDispatcher rd = request.getRequestDispatcher("/ProdutoBusiness");
+                rd.forward(request, response);
+            }else if(command.startsWith("pedido")){
+                RequestDispatcher rd = request.getRequestDispatcher("/PedidoBusiness");
+                rd.forward(request, response);
             }            
         }
     }
@@ -54,6 +60,9 @@ public class Controller extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        command = request.getParameter("command");
+        
         processRequest(request, response);
     }
 

@@ -30,37 +30,56 @@
         <!--Section
         ========================-->
         <section>
-            <div class="row">
-                <div class="col-lg-1"></div>
-                <div class="col-lg-10">
-                    <h1>Sobre</h1>
-                    <hr>
-                </div>
-                <div class="col-lg-1"></div>
-            </div>
+            <article>
                 <div class="row">
-                <div class="col-lg-1"></div>                    
-                <div class="col-lg-6">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sagittis eros ac metus porta congue. Vivamus non porttitor libero, in ultricies massa. Nulla non aliquam tortor, quis venenatis sapien. Donec condimentum ante risus, nec mollis sapien efficitur ut. Aenean consectetur massa non elit ultricies semper nec nec lorem. Praesent id pharetra ligula, molestie rhoncus eros. Morbi semper libero eu risus vehicula venenatis. Proin tempus pulvinar ante et bibendum. Nulla luctus mattis neque a varius.
-
-Mauris et nulla quam. Donec semper consequat consectetur. Integer et luctus massa. In felis turpis, varius quis tincidunt vitae, feugiat pellentesque est. Donec sit amet condimentum risus, eu pellentesque quam. Nam sagittis nec diam quis vestibulum. Ut nec tincidunt est. Vivamus efficitur felis enim, at finibus odio placerat a. Fusce lacinia nulla vel lobortis volutpat.</p>
-                </div>                    
-                <div class="col-lg-5"></div>                    
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-10">
+                        <h1>Sobre</h1>
+                        <hr>
+                    </div>
+                    <div class="col-lg-1"></div>
                 </div>
+            </article>
+            <article>
+                <article>
+                    <div class="container marketing text-center">
+                        <div class="row">
+                            <div class="col-lg-1"></div>
+                            <div class="col-lg-4">
+                                <img class="img-circle" src="img/avatar/fabio.png" alt="Fábio Marquesim" width="140" height="140" />
+                                <h2>Fábio Marquesim</h2>
+                                <p>TIA: 31595006</p>
+                            </div>
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-4">
+                                <img class="img-circle" src="img/avatar/andre.png" alt="Andre Faruolo" width="140" height="140" />
+                                <h2>Andre Faruolo</h2>
+                                <p>TIA: 31509371</p>
+                            </div>
+                            <div class="col-lg-1"></div>
+                        </div><br>
+                        <div class="row">
+                            <div class="col-lg-1"></div>
+                            <div class="col-lg-4">
+                                <img class="img-circle" src="img/avatar/gabriel.png" alt="Gabriel Menegatti" width="140" height="140" />
+                                <h2>Gabriel Menegatti</h2>
+                                <p>TIA: 31539092</p>
+                            </div>
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-4">
+                                <img class="img-circle" src="img/avatar/henrique.png" alt="Henrique Areias" width="140" height="140" />
+                                <h2>Henrique Areias</h2>
+                                <p>TIA: 31544169</p>
+                            </div>
+                            <div class="col-lg-1"></div>
+                        </div>
+                    </div>
+                </article>
+            </article>
         </section>
-        
         <!--Footer
         ========================-->
-        <footer class="footer text-center">
-            <p class="navbar-text"><small>&copy;2016 - Master Clothes</small></p>
-            <a href="#topPage" title="Voltar ao topo">
-                <span class="glyphicon glyphicon-chevron-up"></span>
-            </a>
-            <ul class="list-footer">
-                <li><a href="contato.html">Contato</a></li>
-                <li><a href="sobre.html">Sobre</a></li>
-            </ul>
-        </footer>
+        <%@include file="footer.jspf" %>
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

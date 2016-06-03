@@ -15,20 +15,19 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" id="index">Master Clothes</a>
+                    <a class="navbar-brand" onclick="location.href = 'index.jsp';">Master Clothes</a>
                 </div>
 
                 <!-- Colecao de Links -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a id="index">Home <span class="sr-only">(current)</span></a></li>
-                        <li><a id="loja_fem">Feminino<span class="sr-only">(current)</span></a></li>
-                        <li><a id="loja_masc">Masculino<span class="sr-only">(current)</span></a></li>
-                        <li><a id="loja_sale">Sale<span class="sr-only">(current)</span></a></li>
+                        <li><a onclick="location.href = 'index.jsp';">Home<span class="sr-only">(current)</span></a></li>
+                        <li><a onclick="location.href = 'loja_fem.jsp';">Feminino<span class="sr-only">(current)</span></a></li>
+                        <li><a onclick="location.href = 'loja_masc.jsp';">Masculino<span class="sr-only">(current)</span></a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a id="login">Entrar</a></li>
-                        <li><a id="cadastro">Cadastrar</a></li>
+                        <li><a onclick="location.href = 'login.jsp';" class="navbar-link">Entrar</a></li>
+                        <li><a onclick="location.href = 'cadastro.jsp';" class="navbar-link">Cadastrar</a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </c:when>
@@ -41,24 +40,35 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" id="index">Master Clothes</a>
+                    <a class="navbar-brand" href="index.jsp">Master Clothes</a>
                 </div>
 
                 <!-- Colecao de Links -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a id="home">Home <span class="sr-only">(current)</span></a></li>
-                        <li><a id="loja_fem">Feminino<span class="sr-only">(current)</span></a></li>
-                        <li><a id="loja_masc">Masculino<span class="sr-only">(current)</span></a></li>
-                        <li><a id="loja_sale">Sale <span class="sr-only">(current)</span></a></li>
+                        <li><a onclick="location.href = 'index.jsp';">Home <span class="sr-only">(current)</span></a></li>
+                        <li><a onclick="location.href = 'loja_fem.jsp';">Feminino<span class="sr-only">(current)</span></a></li>
+                        <li><a onclick="location.href = 'loja_masc.jsp';">Masculino<span class="sr-only">(current)</span></a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a id="minha_conta">Perfil</a></li>
-                        <li><a id="sair">Sair</a></li>
+                        <li><a onclick="location.href = 'sacola.jsp';">Sacola</a></li>
+                        <li><a onclick="location.href = 'minha_conta.jsp';">Perfil</a></li>
+                            <c:if test="${pfisica.usuario.tipo==0}">
+                            <li><a onclick="location.href = 'vendas.jsp';">Vendas</a></li>
+                            <li><a onclick="location.href = 'produto.jsp';">Produtos</a></li>
+                            </c:if>
+                            <li><a onclick="location.href = 'Controller?command=user.sair';">Sair<span class="sr-only">(current)</span></a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </c:otherwise>
         </c:choose>
     </div><!-- /.container-fluid -->
 </nav>
-<script src="js/bootstrap.js"></script>
+<!--
+<script type="text/javascript">
+    document.getElementById("login").onclick = function () {
+        location.href = "login.jsp";
+    };
+
+</script>
+-->

@@ -1,0 +1,14 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+
+<footer class="footer text-center">
+            <p class="navbar-text"><small>&copy;2016 - Master Clothes</small></p>
+            <a href="#topPage" title="Voltar ao topo">
+                <span class="glyphicon glyphicon-chevron-up"></span>
+            </a>
+            <ul class="list-footer">
+                <li><a href="contato.jsp">Contato</a></li>
+                <li><a href="sobre.jsp">Sobre</a></li>
+            </ul>
+</footer>
+<script src="js/bootstrap.js"></script>

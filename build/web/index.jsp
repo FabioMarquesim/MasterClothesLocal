@@ -26,7 +26,7 @@
         <!--Menu Superior
         ========================-->
         <%@include file="menusup.jspf" %>
-        
+
         <!--Section
         ========================-->
         <section>
@@ -83,19 +83,9 @@
                 </div>
             </article>
         </section>
-
         <!--Footer
         ========================-->
-        <footer class="footer text-center">
-            <p class="navbar-text"><small>&copy;2016 - Master Clothes</small></p>
-            <a href="#topPage" title="Voltar ao topo">
-                <span class="glyphicon glyphicon-chevron-up"></span>
-            </a>
-            <ul class="list-footer">
-                <li><a href="contato.html">Contato</a></li>
-                <li><a href="sobre.html">Sobre</a></li>
-            </ul>
-        </footer>
+        <%@include file="footer.jspf" %>
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

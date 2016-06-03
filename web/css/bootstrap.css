@@ -122,6 +122,10 @@ footer .glyphicon {
     cursor: pointer;
     text-decoration: none;
 }
+
+textarea{
+    resize: none;
+}
 /*-----------------------------------*/
 
 html {

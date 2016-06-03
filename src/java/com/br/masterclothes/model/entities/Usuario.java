@@ -17,16 +17,18 @@ public class Usuario implements Serializable {
     private long id_usuario;
     private String nome_usuario;
     private String senha;
-    private int tipo;   
+    private int tipo;  
+    private long fk_pfisica;
 
     public Usuario() {
     }
 
-    public Usuario(long id_usuario, String nome_usuario, String senha, int tipo) {
+    public Usuario(long id_usuario, String nome_usuario, String senha, int tipo, long fk_pfisica) {
         this.id_usuario = id_usuario;
         this.nome_usuario = nome_usuario;
         this.senha = senha;
         this.tipo = tipo;
+        this.fk_pfisica = fk_pfisica;
     }
 
     public Usuario(String nome_usuario, String senha, int tipo) {
@@ -34,6 +36,7 @@ public class Usuario implements Serializable {
         this.senha = senha;
         this.tipo = tipo;
     }
+    
 
     public long getId_usuario() {
         return id_usuario;
@@ -67,10 +70,20 @@ public class Usuario implements Serializable {
         this.tipo = tipo;
     }
 
+    public long getFk_pfisica() {
+        return fk_pfisica;
+    }
+
+    public void setFk_pfisica(long fk_pfisica) {
+        this.fk_pfisica = fk_pfisica;
+    }
+
     @Override
     public String toString() {
-        return "Usuario{" + "id_usuario=" + id_usuario + ", nome_usuario=" + nome_usuario + ", senha=" + senha + ", tipo=" + tipo + '}';
+        return "Usuario{" + "id_usuario=" + id_usuario + ", nome_usuario=" + nome_usuario + ", senha=" + senha + ", tipo=" + tipo + ", fk_pfisica=" + fk_pfisica + '}';
     }
+    
+    
 
     
     

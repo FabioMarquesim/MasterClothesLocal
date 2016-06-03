@@ -3,7 +3,7 @@
     Created on : 15/04/2016, 08:08:02
     Author     : MasterClothes
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,6 +24,9 @@
 
     </head>
     <body>
+        <c:if test="${pfisica!=null}">
+            <c:redirect url="index.jsp"></c:redirect>
+        </c:if>
         <!--Sistema de Login
         ======================-->
         <div class="container">
@@ -46,7 +49,8 @@
                         <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Senha" required>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" value="remember-me"> Lembrar-me
+                                <input id="check" type="checkbox" name="lembrar" checked="checked" />
+                                <label for="check">Lembrar-me</label>
                             </label>
                             <label>
                                 <a href="cadastro.jsp" class="cadastro">Crie uma conta</a>
@@ -55,6 +59,8 @@
                         <input type="hidden" name="command" value="user.login"/>
                         <button class="btn btn-lg btn-primary btn-block btn-myColor" type="submit" value="login">Logar</button>
                     </form>
+                    <p class="erro has-error">${erro}</p>
+                    <c:set var="erro" scope="session" value=""></c:set>
                 </div>
                 <div class="col-lg-4"></div>
 

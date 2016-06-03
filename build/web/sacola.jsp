@@ -38,7 +38,14 @@
                 </div>
                 <div class="col-lg-6"></div>
                 <div class="col-lg-2">
-                    <button class="btn my-btn" type="submit">Finalizar Compra</button>
+                    <c:choose>
+                        <c:when test="${pfisica != null && prodAdds != null}">
+                            <a href="Controller?command=pedido.finalizar&id_pfisica=${pfisica.id_pfisica}"><button class="btn my-btn">Finalizar Compra</button></a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="#"><button class="btn my-btn" disabled="disabled">Finalizar Compra</button></a>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
                 <div class="col-lg-1"></div>
             </div>
@@ -53,28 +60,47 @@
             </div>
 
             <!--Barra de itens-->
-            <div class="row">
-                <div class="col-lg-1"></div>
-                <div class="col-lg-2">
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nec nisl lacinia, tristique ante quis, elementum ligula. Mauris gravida felis vitae nisi tincidunt lacinia. Etiam sagittis erat nisl, ac pulvinar nulla imperdiet a.
-                    </p>
-                </div>
-                <div class="col-lg-2">
-                    <img class="img-sacola" src="img/ck_01.jpg" alt=""/>
-                </div>
-                <div class="col-lg-1">
-                    <label for="qtde">Quantidade:</label>
-                    <input class="form-control" id="qtde" name="qtde" type="number" value="1" required>
-                </div>
-                <div class="col-lg-3"></div>
-                <div class="col-lg-2">
-                    <button class="btn my-btn" type="submit">Remover</button>
-                    <p class="btn-item-compra"><span class="preco-sacola">R$00,00</span></p>
-                </div>
-                <div class="col-lg-1"></div>                
-            </div>
+            <c:choose>
+                <c:when test="${prodAdds == null}">
+                    <div class="row">
+                        <div class="col-lg-1"></div> 
+                        <div class="col-lg-10">
+                            <h2 class="center-block">Nenhum Produto Selecionado</h2>
+                        </div> 
+                        <div class="col-lg-1"></div> 
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <c:forEach var="i" items="${prodAdds}">
+                        <div class="row">
+                            <div class="col-lg-1"></div>
+                            <div class="col-lg-2">
+                                <p>
+                                    ${i.produto.descricao}
+                                </p>
+                            </div>
+                            <div class="col-lg-2">
+                                <img class="img-sacola" src="img/sem-foto_800.jpg" alt=""/>
+                            </div>
+                            <div class="col-lg-1">
+                                <label for="qtde">Quantidade:</label>
+                                <input class="form-control" id="qtde" name="qtde" type="text" value="${i.quantidade}" disabled="disabled" />
+                            </div>
+                            <div class="col-lg-3"></div>
+                            <div class="col-lg-2">
+                                <!--<input type="hidden" name="id_produto" value="${i.produto.id_produto}" />
+                                <input type="hidden" name="command" value="pedido.alterar"/>
+                                <input type="submit" class="btn my-btn" value="Alterar" disabled="disabled" />
+                                <a href="Controller?command=pedido.remover&id_produto=${i.produto.id_produto}"><button class="btn my-btn" disabled="disabled">Remover</button></a>
+                                -->
+                                <p class="btn-item-compra"><span class="preco-sacola">R$ ${i.total}</span></p>
+                            </div>
+                            <div class="col-lg-1"></div>     
 
+                        </div>
+                    </c:forEach>
+                </c:otherwise>
+            </c:choose>
             <!--Quebra de linha-->
             <div class="row">
                 <div class="col-lg-1"></div>
@@ -92,7 +118,7 @@
                 </div>
                 <div class="col-lg-6"></div>
                 <div class="col-lg-2">
-                    <p class="btn-item-compra"><span class="preco-sacola">R$00,00</span></p>   
+                    <p class="btn-item-compra"><span class="preco-sacola">R$ ${sub}</span></p>   
                 </div>
                 <div class="col-lg-1"></div>
             </div>
@@ -114,15 +140,16 @@
                 </div>
                 <div class="col-lg-2">
                     <div class="input-group">
-                        <input type="text" placeholder="CEP" class="form-control" aria-label="...">
+                        <!--<input type="text" placeholder="CEP" class="form-control" aria-label="..." disabled="disabled">
                         <div class="input-group-btn">
-                            <button class="btn" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-                        </div>
+                            <button class="btn" type="submit" disabled="disabled"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>-->
+                        <h3>Preço Único</h3>
                     </div>
                 </div>
                 <div class="col-lg-4"></div>
                 <div class="col-lg-2">
-                    <p class="btn-item-compra"><span class="preco-sacola">R$00,00</span></p>
+                    <p class="btn-item-compra"><span class="preco-sacola">R$50,00</span></p>
                 </div>
                 <div class="col-lg-1"></div>
             </div>
@@ -144,7 +171,7 @@
                 </div>
                 <div class="col-lg-6"></div>
                 <div class="col-lg-2">
-                    <p class="btn-item-compra"><span class="preco-thumb-total">R$00,00</span></p>   
+                    <p class="btn-item-compra"><span class="preco-thumb-total">R$ ${sub+50}</span></p>   
                 </div>
                 <div class="col-lg-1"></div>
             </div>
@@ -162,27 +189,25 @@
             <div class="row">
                 <div class="col-lg-1"></div>
                 <div class="col-lg-2">
-                    <button class="btn my-btn" type="submit">Continuar Comprando</button>
+                    <a href="index.jsp"><button class="btn my-btn">Continuar Comprando</button></a>
                 </div>
                 <div class="col-lg-6"></div>
                 <div class="col-lg-2">
-                    <button class="btn my-btn" type="submit">Finalizar Compra</button>
+                    <c:choose>
+                        <c:when test="${pfisica != null && prodAdds != null}">
+                            <a href="Controller?command=pedido.finalizar&id_pfisica=${pfisica.id_pfisica}"><button class="btn my-btn">Finalizar Compra</button></a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="#"><button class="btn my-btn" disabled="disabled">Finalizar Compra</button></a>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
                 <div class="col-lg-1"></div>
             </div>
         </section>
         <!--Footer
         ========================-->
-        <footer class="footer text-center">
-            <p class="navbar-text"><small>&copy;2016 - Master Clothes</small></p>
-            <a href="#topPage" title="Voltar ao topo">
-                <span class="glyphicon glyphicon-chevron-up"></span>
-            </a>
-            <ul class="list-footer">
-                <li><a href="contato.html">Contato</a></li>
-                <li><a href="sobre.html">Sobre</a></li>
-            </ul>
-        </footer>
+        <%@include file="footer.jspf" %>
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

@@ -6,6 +6,8 @@
 package com.br.masterclothes.model.entities;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -29,6 +31,7 @@ public class PessoaFisica implements Serializable {
     private String cidade;
     private String estado;
     private String pais;
+    private Date dataNasc;
 
     //Contrutor Vazio
     public PessoaFisica() {
@@ -188,10 +191,24 @@ public class PessoaFisica implements Serializable {
     public void setPais(String pais) {
         this.pais = pais;
     }
+    
+    public Date getDataNasc() {
+        return dataNasc;
+    }
+    
+    public String getDataNascimento() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String dataNascimento = sdf.format(dataNasc);
+        return dataNascimento ;
+    }
+
+    public void setDataNasc(Date dataNasc) {
+        this.dataNasc = dataNasc;
+    }
 
     @Override
     public String toString() {
-        return "PessoaFisica{" + "usuario=" + usuario + ", id_pfisica=" + id_pfisica + ", nome=" + nome + ", sobrenome=" + sobrenome + ", sexo=" + sexo + ", telefone=" + telefone + ", email=" + email + ", cep=" + cep + ", logradouro=" + logradouro + ", complemento=" + complemento + ", numero=" + numero + ", bairro=" + bairro + ", cidade=" + cidade + ", estado=" + estado + ", pais=" + pais + '}';
+        return "PessoaFisica{" + "usuario=" + usuario + ", id_pfisica=" + id_pfisica + ", nome=" + nome + ", sobrenome=" + sobrenome + ", sexo=" + sexo + ", telefone=" + telefone + ", email=" + email + ", cep=" + cep + ", logradouro=" + logradouro + ", complemento=" + complemento + ", numero=" + numero + ", bairro=" + bairro + ", cidade=" + cidade + ", estado=" + estado + ", pais=" + pais + ", dataNasc=" + dataNasc + '}';
     }
 
 }

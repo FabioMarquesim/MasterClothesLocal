@@ -2384,43 +2384,44 @@ if (typeof jQuery === 'undefined') {
   });
 })
 
-//Link do Menu
-//====================
-document.getElementById("index").onclick = function () {
-    location.href = "index.jsp";
-};  
-
-document.getElementById("loja_fem").onclick = function () {
-    location.href = "loja_fem.jsp";
-};  
-
-document.getElementById("loja_masc").onclick = function () {
-    location.href = "loja_masc.jsp";
-};  
-
-document.getElementById("loja_sale").onclick = function () {
-    location.href = "loja_sale.jsp";
-};  
-
-document.getElementById("home").onclick = function () {
-    location.href = "home.jsp";
-};  
-
-document.getElementById("minha_conta").onclick = function () {
-    location.href = "minha_conta.jsp";
-};  
-
-document.getElementById("login").onclick = function () {
-    location.href = "login.jsp";
-};  
-
-document.getElementById("cadastro").onclick = function () {
-    location.href = "cadastro.jsp";
-};  
-
-$(".nav a").on("click", function(){
-   $(".nav").find(".active").removeClass("active");
-   $(this).parent().addClass("active");
-});
-
+////Link do Menu
+////====================
+//document.getElementById("index").onclick = function () {
+//    location.href = "index.jsp";
+//};  
+//
+//document.getElementById("loja_fem").onclick = function () {
+//    location.href = "loja_fem.jsp";
+//};  
+//
+//document.getElementById("loja_masc").onclick = function () {
+//    location.href = "loja_masc.jsp";
+//};  
+//
+//document.getElementById("loja_sale").onclick = function () {
+//    location.href = "loja_sale.jsp";
+//};  
+//
+//document.getElementById("home").onclick = function () {
+//    location.href = "home.jsp";
+//};  
+//
+//document.getElementById("minha_conta").onclick = function () {
+//    location.href = "minha_conta.jsp";
+//};  
+//
+//
+//document.getElementById("adicionar_produto").onclick = function () {
+//    location.href = "adicionar_produto.jsp";
+//};
+//document.getElementById("alterar_produto").onclick = function () {
+//    location.href = "alterar_produto.jsp";
+//};
+//
+//
+//$(".nav a").on("click", function(){
+//   $(".nav").find(".active").removeClass("active");
+//   $(this).parent().addClass("active");
+//});
+//
 }(jQuery);

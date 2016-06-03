@@ -25,6 +25,42 @@ ADD FOREIGN KEY(fk_item_prod)
 REFERENCES order_item(id_item)
 ON DELETE cascade; 
 
-ALTER TABLE order_item
+
+
+ALTER TABLE order_item 
 ADD FOREIGN KEY(fk_product)
-REFERENCES product(id_product); 
+REFERENCES product(id_product) on delete cascade; 
+
+CREATE TABLE produtos(
+    id_produto BIGINT not null primary key generated always as identity(start with 1, increment by 1),
+    nome VARCHAR(100) not null,
+    descricao VARCHAR(200) not null,
+    tamanho VARCHAR(3) not null,
+    cor VARCHAR(30) not null,
+    preco decimal(8,2) not null
+);
+
+ALTER TABLE produtos ADD status boolean not null default false;
+
+CREATE TABLE categoria (
+    id_categoria BIGINT not null primary key generated always as identity (start with 1, increment by 1),
+    nome_cat VARCHAR(20) not null
+);
+
+CREATE TABLE publico (
+    id_publico BIGINT not null primary key generated always as identity (start with 1, increment by 1),
+    nome_publico VARCHAR(20) not null
+);
+
+ALTER TABLE produtos ADD fk_categoria BIGINT not null default -1;
+ALTER TABLE produtos ADD fk_publico BIGINT not null default -1;
+
+ALTER TABLE produtos 
+ADD FOREIGN KEY(fk_categoria)
+REFERENCES categoria(id_categoria);
+
+ALTER TABLE produtos 
+ADD FOREIGN KEY(fk_publico)
+REFERENCES publico(id_publico);
+
+ALTER TABLE pedido ADD FOREIGN KEY (FK_cliente) REFERENCES usuario(id_usuario);

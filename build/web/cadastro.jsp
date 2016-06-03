@@ -26,7 +26,9 @@
         <!--Menu Superior
         ========================-->
         <%@include file="menusup.jspf" %>
-        
+        <c:if test="${pfisica!=null}">
+            <c:redirect url="index.jsp"></c:redirect>
+        </c:if>
         <!--Section
         ========================-->
         <section>
@@ -36,6 +38,8 @@
                     <div class="col-lg-8">
                         <h1>Cadastro</h1>
                         <hr>
+                        <h3 class="erro has-error">${erro}</h3>
+                    <c:set var="erro" scope="session" value=""></c:set>
                     </div>
                     <div class="col-lg-2"></div>
                 </div>
@@ -50,12 +54,7 @@
                         <input class="form-control" id="firstName" name="firstName" placeholder="Nome" type="text" required>
                         <!--Data de Nascimento-->
                         <label for="date_nas">Data de Nascimento:</label>
-                        <div class='input-group date' id='datetimepicker1'>
-                            <input type='text' id="date_nas" name="date_nas" class="form-control" />
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                        </div>
+                        <input type="date" name="dataNasc" required="required" placeholder="(yyyy-MM-dd)" class="form-control" />
                         <!--NOME_USUARIO-->
                         <label for="username">Nome de Usuário:</label>
                         <input class="form-control" id="username" name="username" placeholder="Username" type="text" required>
@@ -150,16 +149,7 @@
         </section>
         <!--Footer
         ========================-->
-        <footer class="footer text-center">
-            <p class="navbar-text"><small>&copy;2016 - Master Clothes</small></p>
-            <a href="#topPage" title="Voltar ao topo">
-                <span class="glyphicon glyphicon-chevron-up"></span>
-            </a>
-            <ul class="list-footer">
-                <li><a href="contato.html">Contato</a></li>
-                <li><a href="sobre.html">Sobre</a></li>
-            </ul>
-        </footer>
+        <%@include file="footer.jspf" %>
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

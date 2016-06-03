@@ -27,189 +27,57 @@
         ========================-->
         <%@include file="menusup.jspf" %>
 
+        <c:if test="${listaProds == null}">
+            <c:redirect url="Controller?command=prod.preencheFem"></c:redirect>
+        </c:if>
+
         <!--Section
         ========================-->
         <section>
             <!--Nav Lateral
             ========================-->
             <div class="row">
-                <div class="col-lg-2" id="sidebar">
-                    <div class="list-group">
-                        <a href="#" class="list-group-item active">Camisetas</a>
-                        <a href="#" class="list-group-item">Camisas</a>
-                        <a href="#" class="list-group-item">Blusas</a>
-                        <a href="#" class="list-group-item">Calças</a>
-                        <a href="#" class="list-group-item">Bermudas</a>
-                        <a href="#" class="list-group-item">Acessórios</a>
-                    </div>
-                </div>
+                <div class="col-lg-1" id="sidebar"></div>
                 <div class="col-lg-10">
-                    <article>
-                        <div class="row">
-                            <div class="col-lg-10">
-                                <img class="img-border img-responsive center-block" src="img/banner_grande.jpg" alt="">
-                            </div>
+                <article>
+                    <div class="row">
+                        <div class="col-lg-10">
+                            <img class="img-border img-responsive center-block" src="img/banner_grande.jpg" alt="">
                         </div>
-                    </article>
-                    <article class="article-border-loja">
-                        <div class="row">
-                            <div class="col-lg-3">
-                                <div class="thumbnail">
-                                    <img src="img/ck_01.jpg" alt="">
-                                    <div class="caption">
-                                        <h3>Camiseta Teste</h3>
-                                        <p>Preço paradrão $1000,00<br>
-                                            Preço paradrão $1000,00
-                                        </p>
+                    </div>
+                </article>
+                <article class="article-border-loja">
+                    <div class="row">
+                        <c:forEach var="i" begin="0" end="${listaProds.size()-1}">
+                            <c:if test="${listaProds.get(i).status}">
+                                <div class="col-lg-3">
+                                    <div class="thumbnail">
+                                        <img src="img/sem-foto_800.jpg" alt="">
+                                        <div class="caption">
+                                            <h3>${listaProds.get(i).nome}</h3>
+                                            <p>R${listaProds.get(i).preco}<br>
+                                                <a href="Controller?command=prod.direcionaPag&produtoSel=${listaProds.get(i).id_produto}"><button class="btn btn-success">COMPRAR</button></a>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="thumbnail">
-                                    <img src="img/ck_01.jpg" alt="">
-                                    <div class="caption">
-                                        <h3>Camiseta Teste</h3>
-                                        <p>Preço paradrão $1000,00<br>
-                                            Preço paradrão $1000,00
-                                        </p>
-                                    </div>
+                                <c:if test="${i+1%4 == 0}">
                                 </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="thumbnail">
-                                    <img src="img/ck_01.jpg" alt="">
-                                    <div class="caption">
-                                        <h3>Camiseta Teste</h3>
-                                        <p>Preço paradrão $1000,00<br>
-                                            Preço paradrão $1000,00
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="thumbnail">
-                                    <img src="img/ck_01.jpg" alt="">
-                                    <div class="caption">
-                                        <h3>Camiseta Teste</h3>
-                                        <p>Preço paradrão $1000,00<br>
-                                            Preço paradrão $1000,00
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="article-border-loja">
-                        <div class="row">
-                            <div class="col-lg-3">
-                                <div class="thumbnail">
-                                    <img src="img/ck_01.jpg" alt="">
-                                    <div class="caption">
-                                        <h3>Camiseta Teste</h3>
-                                        <p>Preço paradrão $1000,00<br>
-                                            Preço paradrão $1000,00
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="thumbnail">
-                                    <img src="img/ck_01.jpg" alt="">
-                                    <div class="caption">
-                                        <h3>Camiseta Teste</h3>
-                                        <p>Preço paradrão $1000,00<br>
-                                            Preço paradrão $1000,00
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="thumbnail">
-                                    <img src="img/ck_01.jpg" alt="">
-                                    <div class="caption">
-                                        <h3>Camiseta Teste</h3>
-                                        <p>Preço paradrão $1000,00<br>
-                                            Preço paradrão $1000,00
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="thumbnail">
-                                    <img src="img/ck_01.jpg" alt="">
-                                    <div class="caption">
-                                        <h3>Camiseta Teste</h3>
-                                        <p>Preço paradrão $1000,00<br>
-                                            Preço paradrão $1000,00
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="article-border-loja">
-                        <div class="row">
-                            <div class="col-lg-3">
-                                <div class="thumbnail">
-                                    <img src="img/ck_01.jpg" alt="">
-                                    <div class="caption">
-                                        <h3>Camiseta Teste</h3>
-                                        <p>Preço paradrão $1000,00<br>
-                                            Preço paradrão $1000,00
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="thumbnail">
-                                    <img src="img/ck_01.jpg" alt="">
-                                    <div class="caption">
-                                        <h3>Camiseta Teste</h3>
-                                        <p>Preço paradrão $1000,00<br>
-                                            Preço paradrão $1000,00
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="thumbnail">
-                                    <img src="img/ck_01.jpg" alt="">
-                                    <div class="caption">
-                                        <h3>Camiseta Teste</h3>
-                                        <p>Preço paradrão $1000,00<br>
-                                            Preço paradrão $1000,00
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="thumbnail">
-                                    <img src="img/ck_01.jpg" alt="">
-                                    <div class="caption">
-                                        <h3>Camiseta Teste</h3>
-                                        <p>Preço paradrão $1000,00<br>
-                                            Preço paradrão $1000,00
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
+                            </article>
+                            <article class="article-border-loja">
+                                <div class="row">
+                                </c:if>
+                            </c:if>
+                        </c:forEach>
+                    </div>  
+                </article>
                 </div>
-            </div> 
+                <div class="col-lg-1"></div>
+            </div>
         </section>
         <!--Footer
         ========================-->
-        <footer class="footer text-center">
-            <p class="navbar-text"><small>&copy;2016 - Master Clothes</small></p>
-            <a href="#topPage" title="Voltar ao topo">
-                <span class="glyphicon glyphicon-chevron-up"></span>
-            </a>
-            <ul class="list-footer">
-                <li><a href="contato.html">Contato</a></li>
-                <li><a href="sobre.html">Sobre</a></li>
-            </ul>
-        </footer>
+        <%@include file="footer.jspf" %>
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
